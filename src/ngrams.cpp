@@ -76,9 +76,46 @@ void readFile(Vector<string> grams_map, Vector<string> grams_window, ifstream&in
     //iterating through all the lines
 
 
+}
+void readFile(Vector<string> grams_map, Vector<string> grams_window, ifstream&infile, int N, ifstream&infile, int n){
+    ifstream infile;
+    promptUserForFile(infile, "Input file name");
+    //promptUserForFile(infile, "Value of B?");
+    string prompt = ("Value of B?");
+    int n = getInteger(prompt);
+
+    cout<< endl;
+    promptUserForFile(infile, "# of random words to generate (0 to quit)");
+    //@@How can I know the position of N and n in the programming
+    //Create an empty map to store the key and value
+    Map<Vector<string>, Vector<string>> map;
+    Queue<string> window;
+    //
+    //int num_words = 0;
+
+    string line;
+    Vector<string> store_strings
+    while(getline(infile, line));
+    for(i = 2, i < N, i ++){
 
 
 
+    }
+
+
+
+
+
+
+    infile.close();
 
 
 }
+
+
+
+
+
+
+
+
