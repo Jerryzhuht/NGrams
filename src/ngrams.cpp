@@ -55,61 +55,77 @@ void welcome (){
 
 }
 
-void readFile(Vector<string> grams_map, Vector<string> grams_window, ifstream&infile, int N){
-    // Keep a window of N-1 words at all time
+//void readFile(Vector<string> grams_map, Vector<string> grams_window, ifstream&infile, int N){
+//    // Keep a window of N-1 words at all time
 
-    string filename = getLine("Filename");
+//    string filename = getLine("Filename");
 
-    promptUserForFile(infile, "ladygaga.txt");
+//    promptUserForFile(infile, "ladygaga.txt");
 
-    grams_window = Vector<string>;
-    //grams_map = Map<Queue<Stack<string>>, queue<stack>>;
-    grams_map = Map<Vector<string>, Vector<string>>;
-    Queue<
-    //How should I call the literature here@@
-    //string (line);
+//    grams_window = Vector<string>;
+//    //grams_map = Map<Queue<Stack<string>>, queue<stack>>;
+//    grams_map = Map<Vector<string>, Vector<string>>;
+//    Queue<
+//    //How should I call the literature here@@
+//    //string (line);
 
-    //while@@
+//    //while@@
 
-    // keep a counter of the random words generated
-    <int>sum_words = 0
-    //iterating through all the lines
+//    // keep a counter of the random words generated
+//    <int>sum_words = 0
+//    //iterating through all the lines
 
 
 }
-void readFile(Vector<string> grams_map, Vector<string> grams_window, ifstream&infile, int N, ifstream&infile, int n){
+Map<Vector<string>,Vector<string>> readFile(){
     ifstream infile;
     promptUserForFile(infile, "Input file name");
-    //promptUserForFile(infile, "Value of B?");
-    string prompt = ("Value of B?");
-    int n = getInteger(prompt);
+
+    int Ngram = getInteger("Value of B?");
+
+    Map<Vector<string>,Vector<string>> dictionary;
 
     cout<< endl;
-    promptUserForFile(infile, "# of random words to generate (0 to quit)");
     //@@How can I know the position of N and n in the programming
     //Create an empty map to store the key and value
-    Map<Vector<string>, Vector<string>> map;
-    Queue<string> window;
-    //
-    //int num_words = 0;
+    //Map<Vector<string>, Vector<string>> map;
+    Queue<string> passage;
 
-    string line;
-    Vector<string> store_strings
-    while(getline(infile, line));
-    for(i = 2, i < N, i ++){
-
-
-
+    string word;
+    while(infile >> word){
+        passage.enqueue(word);
     }
+    int wordCount = passage.size();
+    Queue<string> window;
+    // from passage to window
+    for (i=wordCount; i>0;i--){
+        for (j=Ngram; j>1; j--){
+            string keyWord = passage.dequeue();
+            window.enqueue(keyWord);
+            passage.enqueue(keyWord);
+        }
+        string valueWord = passage.dequeue();
+        // from window to key vector
+        Queue<string> getWord = keyWord;
+        Vector<string> keyVec;
+        while (!getWord.isEmpty()){
+            keyVec.add(getWord.dequeue());
+        }
+        Vector<string> valueVec;
+        // check if key exist
+        if (dictionary.containsKey(keyVec)){
+            valueVec = dictionary[keyVec]
+        }
 
-
-
-
-
-
+        valueVec.add(valueWord);
+        // put one set in map
+        dictionary.put(keyVec,valueVec);
+        // move window backward one word
+        window.dequeue();
+        window.enqueue(valueWord);
+      }
     infile.close();
-
-
+    return dictionary;
 }
 
 
