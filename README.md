@@ -18,4 +18,4 @@ Each particular piece of text randomly generated in this way is also called a Ma
 
 
 ## Compile Project:
-Use **Life.pro** with [Qt](https://www.qt.io/download).
+Use **Ngrams.pro** with [Qt](https://www.qt.io/download).
