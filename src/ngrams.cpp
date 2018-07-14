@@ -10,19 +10,27 @@
 #include "random.h"
 
 using namespace std;
-Map<Queue<string>,Vector<string>> readFile();
+int askForGram();
+Map<Queue<string>,Vector<string>> readFile(ifstream &infile, int Ngram );
 Queue<string> wordGen(int n, Map<Queue<string>,Vector<string>> &dictionary);
 
 
 int main() {
     // Print the welcoming text
-    cout << "Welcome to CS 106B/X Random Writer ('N-Grams')!" << endl;
+    cout << "Welcome to Random Writer ('N-Grams')!" << endl;
     cout << "This program generates random text based on a document." << endl;
     cout << "Give me an input file and an 'N' value for groups" << endl;
     cout << "of words, and I'll create random text for you." << endl;
     cout << endl;
 
-    Map<Queue<string>,Vector<string>> dictionary = readFile();
+    // ask infile
+    ifstream infile;
+    promptUserForFile(infile, "Input file name");
+
+    // ask N:
+    int Ngram = askForGram();
+
+    Map<Queue<string>,Vector<string>> dictionary = readFile(infile, Ngram);
 //    test
 //    Vector<Queue<string>> allKeys = dictionary.keys();
 //    int keyNum = allKeys.size();
@@ -34,6 +42,11 @@ int main() {
         int n = getInteger("# of random words to generate (0 to quit):");
         if (n == 0){
             break;
+        }
+        if (n < Ngram){
+            cout << "Must be at least "<< Ngram<< " words." <<endl;
+            cout << endl;
+            continue;
         }
 
         Queue<string> sentence = wordGen(n,dictionary);
@@ -49,12 +62,23 @@ int main() {
     return 0;
 }
 
+int askForGram(){
+    while(true){
+        int Ngram = getInteger("Value of N?");
+        if(Ngram >1){
+            return Ngram;
+        }
+        cout << "N must be 2 or greater."<<endl;
+        cout <<  endl;
+    }
+}
 
 
-Map<Queue<string>,Vector<string>> readFile(){
-    ifstream infile;
-    promptUserForFile(infile, "Input file name");
-    int Ngram = getInteger("Value of N?");
+
+Map<Queue<string>,Vector<string>> readFile(ifstream &infile,int Ngram ){
+    //ifstream infile;
+    //promptUserForFile(infile, "Input file name");
+    //int Ngram = askForGram();
 
     Map<Queue<string>,Vector<string>> dictionary;
     cout<< endl;
